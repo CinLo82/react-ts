@@ -1,16 +1,28 @@
-
+"use client";
+import { useState } from 'react';
 import { RandomFox } from '@components/RandomFox'
 
-// Generates a random number between 1 and 122
-const randomNumber = () => Math.floor(Math.random() * 122) + 1;
+const random = () => Math.floor(Math.random() * 122) + 1;
 
 export default function Home() {
+  const [images, setImages] = useState<string[]>([
+    `https://randomfox.ca/images/${random()}.jpg`,
+    `https://randomfox.ca/images/${random()}.jpg`,
+    `https://randomfox.ca/images/${random()}.jpg`,
+    `https://randomfox.ca/images/${random()}.jpg`
+  ]);
+
   return (
-    <main>
-      <h1 className="text-3xl font-bold underline ">
-      Hello Cinlo!
-      <RandomFox image={`https://randomfox.ca/images/${randomNumber()}.jpg`}/>
-      </h1>
-    </main>
-  )
-}
+    <div>
+      <main>
+        <h1 className="text-3xl font-bold underline ">Hello Cinlo!</h1> 
+
+        {images.map((image, index) => (
+           <div key={index} className='p-4'>
+            <RandomFox image={image}/>
+          </div>
+        ))}
+      </main>
+    </div>
+  );
+};
